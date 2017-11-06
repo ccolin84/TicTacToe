@@ -102,7 +102,7 @@ class Board {
 
   promptUserInput() {
     // get the next move from the user
-    rl.question('Enter row and column for your next move (ex: 1 1 for the top left): ', (answer) => { 
+    rl.question('Enter row and column for your next move (ex: 0 0 for the top left): ', (answer) => { 
       let [row, column] = answer.trim().split(' ').map(x => Number(x));
       let user = this._turn = 1 ? 'X' : 'O';
       if (this.isValidMove(user, row, column)) {
