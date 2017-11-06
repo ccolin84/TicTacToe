@@ -75,11 +75,13 @@ class Board {
     let winner;
 
     if (rowsCheck) winner = rowsCheck;
-    if (checkColumns) winner = colsCheck;
+    if (colsCheck) winner = colsCheck;
     if (diagsCheck) winner = diagsCheck;
 
     if (winner) {
-      console.log(`${winner} wins!\n`);
+      this.printBoard();
+      console.log(`Player ${winner === 'X' ? 1 : 0} (${winner}) wins!\n`);
+      rl.close();
       return true;
     }
     return false;
@@ -95,15 +97,18 @@ class Board {
     if (col < 0 || col > 2) return false;
     let spot = this._board[row][col];
     if (spot !== '') return false;
+    return true;
   }
 
   promptUserInput() {
     // get the next move from the user
     rl.question('Enter row and column for your next move (ex: 0 0 for the top left): ', (answer) => { 
+      console.log('answer attempt: ', answer, '\n');
       let [row, column] = answer.trim().split(' ').map(x => Number(x));
-      let user = this._turn = 1 ? 'X' : 'O';
+      let user = this._turn === 1 ? 'X' : 'O';
       if (this.isValidMove(user, row, column)) {
         this.enterMove(user, row, column);
+        this._turn = (this._turn === 1 ? 0 : 1);
         let winner = this.checkForWin();
         if (!winner) {
           this.printBoard();
@@ -113,7 +118,6 @@ class Board {
         console.log('Invalid Move! Try again\n');
         this.promptUserInput();
       }
-      rl.close();
     });
   }
 }
