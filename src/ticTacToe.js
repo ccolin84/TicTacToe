@@ -32,10 +32,7 @@ class Board {
   }
 
   startGame() {
-    while(this.checkForWin()) {
-      this.printBoard();
-      this.promptUserInput();
-    }
+    this.promptUserInput();
   }
 
   checkForWin() {
@@ -83,9 +80,9 @@ class Board {
 
     if (winner) {
       console.log(`${winner} wins!\n`);
-      return false;
+      return true;
     }
-    return true;
+    return false;
   }
 
   enterMove(player, row, col) {
@@ -107,6 +104,11 @@ class Board {
       let user = this._turn = 1 ? 'X' : 'O';
       if (this.isValidMove(user, row, column)) {
         this.enterMove(user, row, column);
+        let winner = this.checkForWin();
+        if (!winner) {
+          this.printBoard();
+          this.promptUserInput();
+        }
       } else {
         console.log('Invalid Move! Try again\n');
         this.promptUserInput();
