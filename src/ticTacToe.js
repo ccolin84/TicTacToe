@@ -57,7 +57,7 @@ class Board {
       let diagLR = [this._board[0][0], this._board[1][1], this._board[2][2]];
       let diagRL = [this._board[0][2], this._board[1][1], this._board[2][0]];
       if (this._board[0][0] === 'X' || this._board[0][0] === 'O') {
-        if (this._board[0][0] === this._board[1][1] && this._board[0][0] === this._board[1][1]) {
+        if (this._board[0][0] === this._board[1][1] && this._board[2][2] === this._board[1][1]) {
           return this._board[0][0];
         }
       }
