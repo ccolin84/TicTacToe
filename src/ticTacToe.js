@@ -20,12 +20,12 @@ class Board {
     let boardString = '';
     this._board.forEach(row => {
       let rowString = '';
-      rowString.push('---------\n');
+      rowString += ('---------\n');
       row.forEach(spot => {
         rowString += (spot + ' | ');
       });
-      boardString.push(rowString.slice(0,-2));
-      boardString.push('\n');
+      boardString += (rowString.slice(0,-2));
+      boardString += ('\n');
     });
     console.log(boardString);
     console.log(`Player ${this._turn}'s turn! ( ${this._turn === 1 ? 'X' : 'O'} )\n`);
